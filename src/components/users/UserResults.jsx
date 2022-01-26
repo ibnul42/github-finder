@@ -6,9 +6,9 @@ import UserItem from './UserItem';
 function UserResults() {
     const { users, loading, fetchUsers } = useContext(GithubContext);
 
-    useEffect(() => {
-        fetchUsers();
-    }, [])
+    // useEffect(() => {
+    //     fetchUsers();
+    // }, [])
 
     if (loading) {
         return <Spinner />;

@@ -7,6 +7,7 @@ export const GithubProvider = ({ children }) => {
     const initialState = ({
         users: [],
         user: {},
+        repos: [],
         loading: false,
     })
 
@@ -60,13 +61,22 @@ export const GithubProvider = ({ children }) => {
             // },
         });
 
+        const repoRes = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos`, {
+            // headers: {
+            //     Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
+            // },
+        });
+
+
+
         if(res.status === 404){
             window.location = '/notfound'
         } else {
             const data = await res.json();
+            const repos = await repoRes.json();
             dispatch({
                 type: 'GET_USER',
-                payload: data,
+                payload: {data, repos},
             })
         }       
 
@@ -88,6 +98,7 @@ export const GithubProvider = ({ children }) => {
             users: state.users,
             loading: state.loading,
             user: state.user,
+            repos: state.repos,
             fetchUsers,
             searchUsers,
             clearUsers,

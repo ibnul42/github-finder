@@ -4,6 +4,8 @@ const alertReducer = (state, action) => {
             return action.payload
         case 'REMOVE_ALERT':
             return null
+        default:
+            return state
     }
 }
 
